@@ -139,7 +139,10 @@ function info_cachefile(pkg::PkgId, path::String)
         end
         # then load the file
         if isdefined(Base, :ocachefile_from_cachefile)
-            return info_cachefile(pkg, Base.ocachefile_from_cachefile(path), depmods, true)
+            @show path isfile(path)
+            opath = Base.ocachefile_from_cachefile(path)
+            @show opath isfile(opath)
+            return info_cachefile(pkg, opath, depmods, true)
         end
         info_cachefile(pkg, path, depmods)
     end
